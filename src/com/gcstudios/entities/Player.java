@@ -6,6 +6,7 @@ package com.gcstudios.entities;
 import java.awt.image.BufferedImage;
 
 import com.gcstudios.main.Game;
+import com.gcstudios.world.World;
 
 
 
@@ -40,6 +41,10 @@ public class Player extends Entity{
 			int yy = this.getY();
 			Bullet bullet = new Bullet(xx, yy, 3, 3, 4, null);
 			Game.entities.add(bullet);
+		}
+		
+		if(Game.life < 0) {
+			World.restartGame();
 		}
 	}
 

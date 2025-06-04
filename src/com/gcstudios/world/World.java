@@ -3,6 +3,7 @@ package com.gcstudios.world;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -10,7 +11,10 @@ import com.gcstudios.entities.Enemy;
 import com.gcstudios.entities.Entity;
 import com.gcstudios.entities.Player;
 import com.gcstudios.graficos.UI;
+import com.gcstudios.main.EnemySpawn;
 import com.gcstudios.main.Game;
+import com.gcstudios.graficos.Spritesheet;
+import com.gcstudios.world.World;
 
 public class World {
 
@@ -81,7 +85,15 @@ public class World {
 
 	
 	public static void restartGame(){
-		//TODO: Aplicar método para reiniciar o jogo corretamente.
+		//TODO: Aplicar mï¿½todo para reiniciar o jogo corretamente.
+		Game.entities.clear();
+		Game.life = 100;
+		Game.score = 0;
+		Game.entities = new ArrayList<Entity>();
+		Game.spritesheet = new Spritesheet("/spritesheet.png");
+		Game.player = new Player(Game.WIDTH/2,Game.HEIGHT-16,16,16,1,Game.spritesheet.getSprite(0, 0, 16, 16));
+		Game.entities.add(Game.player);
+		Game.world = new World();
 		return;
 	}
 	

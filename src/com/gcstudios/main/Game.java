@@ -43,9 +43,17 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener,M
 	public static Spritesheet spritesheet;
 	public static Player player;
 	
+	public static int score = 0;
+	public static double life = 100;
+	
 	public EnemySpawn enemySpawn;
 	
 	public BufferedImage BG_IMAGE;
+	public BufferedImage BG_IMAGE2;
+	
+	public double backY = 0;
+	public double backY2 = -160;
+	public double backSpd = 0.5;
 
 	public UI ui;
 	
@@ -66,6 +74,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener,M
 		enemySpawn = new EnemySpawn();
 		try {
 			BG_IMAGE = ImageIO.read(getClass().getResource("/bg.png"));
+			BG_IMAGE2 = ImageIO.read(getClass().getResource("/bg.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +121,16 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener,M
 		}
 		
 		ui.tick();
-
+		
+		backY+=backSpd;
+		if(backY >= 160) {
+			backY = -160;
+		}
+		
+		backY2+=backSpd;
+		if(backY2 >= 160) {
+			backY2 = -160;
+		}
 		
 	}
 	
@@ -128,7 +146,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener,M
 		Graphics g = image.getGraphics();
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0,WIDTH,HEIGHT);
-		g.drawImage(BG_IMAGE, 0, 0, null);
+		g.drawImage(BG_IMAGE, 0, (int)backY, null);
+		g.drawImage(BG_IMAGE2, 0, (int)backY2, null);
 		/*Renderização do jogo*/
 		//Graphics2D g2 = (Graphics2D) g;
 		world.render(g);
